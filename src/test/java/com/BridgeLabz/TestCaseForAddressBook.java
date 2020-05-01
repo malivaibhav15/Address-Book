@@ -21,7 +21,7 @@ public class TestCaseForAddressBook {
     public static String TestFilePath = "src/main/resources/AddressBook.json";
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         addressBook = new AddressBook();
         objectMapper = new ObjectMapper();
         person = new Person();
@@ -29,11 +29,21 @@ public class TestCaseForAddressBook {
 
     @Test
     public void givenAddPerson_WhenProper_ShouldReturnTrue() throws IOException {
-        Person person = new Person("V", "M", "A", "AA", "MG", "8626", "4315");
+        Person person = new Person("AAA", "BBB", "CCC", "DDD", "EEE", "111", "222");
         AddressBookInterface addressBookInterface = new AddressBook();
         addressBookInterface.addPerson(person, TestFilePath);
         ArrayList<Person> entries = objectMapper.readValue(new File(TestFilePath), new TypeReference<ArrayList<Person>>() {
         });
         Assert.assertEquals(person.getFirstName(), entries.get(1).getFirstName());
+    }
+
+    @Test
+    public void givenPerson_WhenUpdate_ShouldReturnTrue() throws IOException
+    {
+        Person person = new Person("Vaibhav","Mali","vvv","Amb","Mah","8626","4315");
+        AddressBookInterface addressBookInterface = new AddressBook();
+        addressBookInterface.updatePerson(person,TestFilePath);
+        ArrayList<Person> entires = objectMapper.readValue(new File(TestFilePath), new TypeReference<ArrayList<Person>>(){});
+        Assert.assertEquals(person.getFirstName(),entires.get(1).getFirstName());
     }
 }
