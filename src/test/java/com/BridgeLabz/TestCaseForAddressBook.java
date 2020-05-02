@@ -18,7 +18,7 @@ public class TestCaseForAddressBook {
     AddressBook addressBook;
     ObjectMapper objectMapper;
     Person person;
-    public static String TestFilePath = "src/main/resources/AddressBook.json";
+    public static String TestFilePath = "src/main/resources/TestAddressBook.json";
 
     @Before
     public void setUp() {
@@ -29,7 +29,7 @@ public class TestCaseForAddressBook {
 
     @Test
     public void givenAddPerson_WhenProper_ShouldReturnTrue() throws IOException {
-        Person person = new Person("AAA", "BBB", "CCC", "DDD", "EEE", "111", "222");
+        Person person = new Person("Vaibhav", "Mali", "AB Colony", "Ambajogai", "Maharashtra", "1234567890", "431517");
         AddressBookInterface addressBookInterface = new AddressBook();
         addressBookInterface.addPerson(person, TestFilePath);
         ArrayList<Person> entries = objectMapper.readValue(new File(TestFilePath), new TypeReference<ArrayList<Person>>() {
@@ -38,12 +38,22 @@ public class TestCaseForAddressBook {
     }
 
     @Test
-    public void givenPerson_WhenUpdate_ShouldReturnTrue() throws IOException
-    {
-        Person person = new Person("Vaibhav","Mali","vvv","Amb","Mah","8626","4315");
+    public void givenPerson_WhenUpdate_ShouldReturnTrue() throws IOException {
+        Person person = new Person("Vaibhav", "Mali", "vvv", "Amb", "Mah", "111", "4315");
         AddressBookInterface addressBookInterface = new AddressBook();
-        addressBookInterface.updatePerson(person,TestFilePath);
-        ArrayList<Person> entires = objectMapper.readValue(new File(TestFilePath), new TypeReference<ArrayList<Person>>(){});
-        Assert.assertEquals(person.getFirstName(),entires.get(1).getFirstName());
+        addressBookInterface.updatePerson(person, TestFilePath);
+        ArrayList<Person> entries = objectMapper.readValue(new File(TestFilePath), new TypeReference<ArrayList<Person>>() {
+        });
+        Assert.assertEquals(person.getFirstName(), entries.get(0).getFirstName());
+    }
+
+    @Test
+    public void givenPersonObject_IfDeleted_ShouldReturnTrue() throws IOException {
+        Person person = new Person("aaa", "bbb", "ccc", "ddd", "eee", "111", "222");
+        AddressBookInterface addressBookInterface = new AddressBook();
+        addressBookInterface.deletePerson(person, TestFilePath);
+        ArrayList<Person> data = objectMapper.readValue(new File(TestFilePath), new TypeReference<ArrayList<Person>>() {
+        });
+        Assert.assertEquals(true, data.isEmpty());
     }
 }
