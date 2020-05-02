@@ -31,9 +31,8 @@ public class AddressBook implements AddressBookInterface {
     @Override
     public void updatePerson(Person person, String pathOfFile) throws IOException {
         ArrayList<Person> data = readFileData(pathOfFile);
-        for (Person person1 : data)
-        {
-            if(person1.getFirstName().equalsIgnoreCase(person.getFirstName()) && person1.getLastName().equalsIgnoreCase(person.getLastName()));
+        for (Person person1 : data) {
+            if (person1.getFirstName().equalsIgnoreCase(person.getFirstName()) && person1.getLastName().equalsIgnoreCase(person.getLastName()))
             {
                 person1.setAddress(person.getAddress());
                 person1.setCity(person.getCity());
@@ -42,6 +41,20 @@ public class AddressBook implements AddressBookInterface {
                 person1.setZip(person.getZip());
             }
         }
-        writeFileData(data,pathOfFile);
+        writeFileData(data, pathOfFile);
+    }
+
+    @Override
+    public void deletePerson(Person person, String pathOfFile) throws IOException {
+        ArrayList<Person> fileData = readFileData(pathOfFile);
+        Person deletePerson = null;
+        for (Person person1 : fileData) {
+            if (person1.getFirstName().equalsIgnoreCase(person.getFirstName()) && person1.getLastName().equalsIgnoreCase(person.getLastName())){
+                deletePerson = person1;
+                break;
+            }
+        }
+        fileData.remove(deletePerson);
+        writeFileData(fileData, pathOfFile);
     }
 }
