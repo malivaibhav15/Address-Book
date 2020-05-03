@@ -54,4 +54,25 @@ public class TestCaseForAddressBook {
         ArrayList<Person> data = objectMapper.readValue(new File(filePath), new TypeReference<ArrayList<Person>>() {});
         Assert.assertEquals(true, data.isEmpty());
     }
+
+    @Test
+    public void givenListPersons_WhenSortedByName_ShouldReturnTrue() throws IOException {
+        ArrayList<Person> sortPerson = new ArrayList<>();
+        Person person1 = new Person("aaa", "bbb", "ccc", "ddd", "eee", "111", "222");
+        Person person2 = new Person("xyz", "psq", "aaa", "ccc", "mh", "12", "21");
+        Person person3 = new Person("pqr", "zzz", "yyy", "www", "mh", "2123", "24");
+        Person person4 = new Person("mno", "qqq", "www", "rrr", "mh", "147", "369");
+        sortPerson.add(person1);
+        sortPerson.add(person2);
+        sortPerson.add(person3);
+        sortPerson.add(person4);
+        AddressBookInterface addressBookInterface = new AddressBook();
+        addressBookInterface.sortByName(filePath);
+        ArrayList<Person> data = objectMapper.readValue(new File(filePath), new TypeReference<ArrayList<Person>>() {});
+        Assert.assertEquals(sortPerson.get(0).getFirstName(), data.get(0).getFirstName());
+        Assert.assertEquals(sortPerson.get(3).getFirstName(), data.get(1).getFirstName());
+        Assert.assertEquals(sortPerson.get(2).getFirstName(), data.get(2).getFirstName());
+        Assert.assertEquals(sortPerson.get(1).getFirstName(), data.get(3).getFirstName());
+    }
+
 }
