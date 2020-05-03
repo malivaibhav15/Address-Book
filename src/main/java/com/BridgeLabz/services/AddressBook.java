@@ -65,9 +65,23 @@ public class AddressBook implements AddressBookInterface {
         writeFileData(entries, pathOfFile);
     }
 
-    public void sortPersonDataByZipCode(String filePath) throws IOException {
-        ArrayList<Person> data = readFileData(filePath);
+    @Override
+    public void sortPersonDataByZipCode(String pathOfFile) throws IOException {
+        ArrayList<Person> data = readFileData(pathOfFile);
         data.sort(Comparator.comparing(Person::getZip));
-        writeFileData(data, filePath);
+        writeFileData(data, pathOfFile);
     }
+
+    @Override
+    public boolean printEntries(String filePath) {
+        try {
+            ArrayList<Person> data = readFileData(filePath);
+            data.forEach(print -> System.out.println(print));
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }
