@@ -33,8 +33,7 @@ public class AddressBook implements AddressBookInterface {
     public void updatePerson(Person person, String pathOfFile) throws IOException {
         ArrayList<Person> data = readFileData(pathOfFile);
         for (Person person1 : data) {
-            if (person1.getFirstName().equalsIgnoreCase(person.getFirstName()) && person1.getLastName().equalsIgnoreCase(person.getLastName()))
-            {
+            if (person1.getFirstName().equalsIgnoreCase(person.getFirstName()) && person1.getLastName().equalsIgnoreCase(person.getLastName())) {
                 person1.setAddress(person.getAddress());
                 person1.setCity(person.getCity());
                 person1.setMobileNumber(person.getMobileNumber());
@@ -50,7 +49,7 @@ public class AddressBook implements AddressBookInterface {
         ArrayList<Person> fileData = readFileData(pathOfFile);
         Person deletePerson = null;
         for (Person person1 : fileData) {
-            if (person1.getFirstName().equalsIgnoreCase(person.getFirstName()) && person1.getLastName().equalsIgnoreCase(person.getLastName())){
+            if (person1.getFirstName().equalsIgnoreCase(person.getFirstName()) && person1.getLastName().equalsIgnoreCase(person.getLastName())) {
                 deletePerson = person1;
                 break;
             }
@@ -64,5 +63,11 @@ public class AddressBook implements AddressBookInterface {
         ArrayList<Person> entries = readFileData(pathOfFile);
         entries.sort(Comparator.comparing(Person::getFirstName));
         writeFileData(entries, pathOfFile);
+    }
+
+    public void sortPersonDataByZipCode(String filePath) throws IOException {
+        ArrayList<Person> data = readFileData(filePath);
+        data.sort(Comparator.comparing(Person::getZip));
+        writeFileData(data, filePath);
     }
 }
