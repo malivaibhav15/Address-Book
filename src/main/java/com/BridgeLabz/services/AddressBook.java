@@ -7,6 +7,7 @@ import org.codehaus.jackson.type.TypeReference;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class AddressBook implements AddressBookInterface {
 
@@ -56,5 +57,12 @@ public class AddressBook implements AddressBookInterface {
         }
         fileData.remove(deletePerson);
         writeFileData(fileData, pathOfFile);
+    }
+
+    @Override
+    public void sortByName(String pathOfFile) throws IOException {
+        ArrayList<Person> entries = readFileData(pathOfFile);
+        entries.sort(Comparator.comparing(Person::getFirstName));
+        writeFileData(entries, pathOfFile);
     }
 }
