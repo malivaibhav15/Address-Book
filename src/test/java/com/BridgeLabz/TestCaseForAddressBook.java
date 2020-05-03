@@ -33,8 +33,7 @@ public class TestCaseForAddressBook {
         Person person = new Person("Vaibhav", "Mali", "AB Colony", "Ambajogai", "Maharashtra", "1234567890", "431517");
         AddressBookInterface addressBookInterface = new AddressBook();
         addressBookInterface.addPerson(person, TestFilePath);
-        ArrayList<Person> entries = objectMapper.readValue(new File(TestFilePath), new TypeReference<ArrayList<Person>>() {
-        });
+        ArrayList<Person> entries = objectMapper.readValue(new File(TestFilePath), new TypeReference<ArrayList<Person>>() {});
         Assert.assertEquals(person.getFirstName(), entries.get(1).getFirstName());
     }
 
@@ -43,8 +42,7 @@ public class TestCaseForAddressBook {
         Person person = new Person("Vaibhav", "Mali", "vvv", "Amb", "Mah", "111", "4315");
         AddressBookInterface addressBookInterface = new AddressBook();
         addressBookInterface.updatePerson(person, TestFilePath);
-        ArrayList<Person> entries = objectMapper.readValue(new File(TestFilePath), new TypeReference<ArrayList<Person>>() {
-        });
+        ArrayList<Person> entries = objectMapper.readValue(new File(TestFilePath), new TypeReference<ArrayList<Person>>() {});
         Assert.assertEquals(person.getFirstName(), entries.get(0).getFirstName());
     }
 
@@ -53,8 +51,7 @@ public class TestCaseForAddressBook {
         Person person = new Person("aaa", "bbb", "ccc", "ddd", "eee", "111", "222");
         AddressBookInterface addressBookInterface = new AddressBook();
         addressBookInterface.deletePerson(person, filePath);
-        ArrayList<Person> data = objectMapper.readValue(new File(filePath), new TypeReference<ArrayList<Person>>() {
-        });
+        ArrayList<Person> data = objectMapper.readValue(new File(filePath), new TypeReference<ArrayList<Person>>() {});
         Assert.assertEquals(true, data.isEmpty());
     }
 
@@ -71,8 +68,7 @@ public class TestCaseForAddressBook {
         sortPerson.add(person4);
         AddressBookInterface addressBookInterface = new AddressBook();
         addressBookInterface.sortByName(filePath);
-        ArrayList<Person> data = objectMapper.readValue(new File(filePath), new TypeReference<ArrayList<Person>>() {
-        });
+        ArrayList<Person> data = objectMapper.readValue(new File(filePath), new TypeReference<ArrayList<Person>>() {});
         Assert.assertEquals(sortPerson.get(0).getFirstName(), data.get(0).getFirstName());
         Assert.assertEquals(sortPerson.get(3).getFirstName(), data.get(1).getFirstName());
         Assert.assertEquals(sortPerson.get(2).getFirstName(), data.get(2).getFirstName());
@@ -91,13 +87,21 @@ public class TestCaseForAddressBook {
         sortPerson.add(person3);
         sortPerson.add(person4);
         AddressBookInterface addressBookInterface = new AddressBook();
-        addressBookInterface.sortByName(filePath);
-        ArrayList<Person> data = objectMapper.readValue(new File(filePath), new TypeReference<ArrayList<Person>>() {
-        });
+        addressBookInterface.sortPersonDataByZipCode(filePath);
+        ArrayList<Person> data = objectMapper.readValue(new File(filePath), new TypeReference<ArrayList<Person>>() {});
         Assert.assertEquals(sortPerson.get(1).getFirstName(), data.get(0).getFirstName());
         Assert.assertEquals(sortPerson.get(0).getFirstName(), data.get(1).getFirstName());
         Assert.assertEquals(sortPerson.get(3).getFirstName(), data.get(2).getFirstName());
         Assert.assertEquals(sortPerson.get(2).getFirstName(), data.get(3).getFirstName());
+    }
+
+    @Test
+    public void givenPersonInformation_whenPrintEntriesData_shouldReturnTrue() throws IOException {
+        Person person = new Person("Vaibhav", "Mali", "AB Colony", "Ambajogai", "Maharashtra", "1234567890", "431517");
+        AddressBookInterface addressBookInterface = new AddressBook();
+        addressBookInterface.addPerson(person, TestFilePath);
+        boolean isPrinted = addressBook.printEntries(filePath);
+        Assert.assertTrue(isPrinted);
     }
 
 }
