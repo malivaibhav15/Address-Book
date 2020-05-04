@@ -1,4 +1,4 @@
-package com.BridgeLabz.services;
+package com.BridgeLabz.InterFace;
 
 import com.BridgeLabz.model.Person;
 
@@ -17,5 +17,4 @@ public interface AddressBookInterface {
 
     boolean printEntries(String filePath);
 
-    public boolean newAddressBook(String addressBookName) throws IOException;
 }
