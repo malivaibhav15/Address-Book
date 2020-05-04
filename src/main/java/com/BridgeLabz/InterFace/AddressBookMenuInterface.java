@@ -5,4 +5,6 @@ import java.io.IOException;
 public interface AddressBookMenuInterface {
     public boolean newAddressBook(String addressBookName) throws IOException;
 
+    public boolean openExistingAddressBook(String addressBookName);
+
 }
