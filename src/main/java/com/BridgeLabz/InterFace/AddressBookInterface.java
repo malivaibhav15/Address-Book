@@ -16,4 +16,6 @@ public interface AddressBookInterface {
     void sortPersonDataByZipCode(String pathOfFile) throws IOException;
 
     boolean printEntries(String filePath);
+
+    public boolean newAddressBook(String addressBookName) throws IOException;
 }
