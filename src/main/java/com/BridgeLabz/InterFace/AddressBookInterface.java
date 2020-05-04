@@ -19,4 +19,8 @@ public interface AddressBookInterface {
     boolean printEntries(String filePath);
 
     boolean saveAddressBook(String filePath, ArrayList<Person> data) throws IOException;
+
+    public boolean newAddressBook(String addressBookName) throws IOException;
+
+    public boolean openExistingAddressBook(String addressBookName);
 }
