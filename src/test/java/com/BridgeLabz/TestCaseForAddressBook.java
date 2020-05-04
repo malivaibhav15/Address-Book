@@ -22,6 +22,7 @@ public class TestCaseForAddressBook {
     Person person;
     public static String TestFilePath = "src/main/resources/TestAddressBook.json";
     public static String filePath = "src/main/resources/AddressBook.json";
+    public static String newFilePath = "src/main/resources/NewFile.json";
 
     @Before
     public void setUp() {
@@ -110,7 +111,24 @@ public class TestCaseForAddressBook {
     public void givenOption_WhenCreateNewAddressBook_ShouldReturnTrue() throws IOException {
         AddressBookMenuInterface addressBookMenuInterface = new AddressBookMenu();
         Boolean result = addressBookMenuInterface.newAddressBook("NewFile");
-        Assert.assertTrue(true, result);
+        Assert.assertEquals(true, result);
+    }
+
+    @Test
+    public void ifOpenAddressBook_OpenFile_ShouldReturnTrue() {
+        AddressBookMenuInterface addressBookMenuInterface = new AddressBookMenu();
+        Boolean result = addressBookMenuInterface.openExistingAddressBook("NewFile");
+        Assert.assertEquals(true, result);
+    }
+
+    @Test
+    public void givenUserChooseSave_AsAOption_ShouldReturn() throws IOException {
+        Person person = new Person("aaa", "bbb", "ccc", "ddd", "eee", "111", "222");
+        addressBook.addPerson(person, filePath);
+        ArrayList<Person> data = objectMapper.readValue(new File(filePath), new TypeReference<ArrayList<Person>>() {});
+        boolean isFileSaved  = addressBook.saveAddressBook(filePath,data);
+        Assert.assertTrue(isFileSaved);
+
     }
 
 }
