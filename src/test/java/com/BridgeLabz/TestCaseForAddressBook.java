@@ -1,8 +1,10 @@
 package com.BridgeLabz;
 
+import com.BridgeLabz.services.AddressBookMenu;
+import com.BridgeLabz.InterFace.AddressBookMenuInterface;
 import com.BridgeLabz.model.Person;
 import com.BridgeLabz.services.AddressBook;
-import com.BridgeLabz.services.AddressBookInterface;
+import com.BridgeLabz.InterFace.AddressBookInterface;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 import org.junit.Assert;
@@ -102,6 +104,13 @@ public class TestCaseForAddressBook {
         addressBookInterface.addPerson(person, TestFilePath);
         boolean isPrinted = addressBook.printEntries(filePath);
         Assert.assertTrue(isPrinted);
+    }
+
+    @Test
+    public void givenOption_WhenCreateNewAddressBook_ShouldReturnTrue() throws IOException {
+        AddressBookMenuInterface addressBookMenuInterface = new AddressBookMenu();
+        Boolean result = addressBookMenuInterface.newAddressBook("NewFile");
+        Assert.assertTrue(true, result);
     }
 
 }
