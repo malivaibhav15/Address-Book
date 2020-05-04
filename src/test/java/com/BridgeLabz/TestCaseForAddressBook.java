@@ -1,7 +1,5 @@
 package com.BridgeLabz;
 
-import com.BridgeLabz.services.AddressBookMenu;
-import com.BridgeLabz.InterFace.AddressBookMenuInterface;
 import com.BridgeLabz.model.Person;
 import com.BridgeLabz.services.AddressBook;
 import com.BridgeLabz.InterFace.AddressBookInterface;
@@ -22,7 +20,6 @@ public class TestCaseForAddressBook {
     Person person;
     public static String TestFilePath = "src/main/resources/TestAddressBook.json";
     public static String filePath = "src/main/resources/AddressBook.json";
-    public static String newFilePath = "src/main/resources/NewFile.json";
 
     @Before
     public void setUp() {
@@ -109,15 +106,15 @@ public class TestCaseForAddressBook {
 
     @Test
     public void givenOption_WhenCreateNewAddressBook_ShouldReturnTrue() throws IOException {
-        AddressBookMenuInterface addressBookMenuInterface = new AddressBookMenu();
-        Boolean result = addressBookMenuInterface.newAddressBook("NewFile");
+        AddressBookInterface addressBookInterface = new AddressBook();
+        Boolean result = addressBookInterface.newAddressBook("NewFile");
         Assert.assertEquals(true, result);
     }
 
     @Test
     public void ifOpenAddressBook_OpenFile_ShouldReturnTrue() {
-        AddressBookMenuInterface addressBookMenuInterface = new AddressBookMenu();
-        Boolean result = addressBookMenuInterface.openExistingAddressBook("NewFile");
+        AddressBookInterface addressBookInterface = new AddressBook();
+        Boolean result = addressBookInterface.openExistingAddressBook("NewFile");
         Assert.assertEquals(true, result);
     }
 
