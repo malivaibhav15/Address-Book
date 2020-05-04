@@ -3,6 +3,7 @@ package com.BridgeLabz.InterFace;
 import com.BridgeLabz.model.Person;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public interface AddressBookInterface {
     void addPerson(Person person, String pathOfFile) throws IOException;
@@ -17,4 +18,5 @@ public interface AddressBookInterface {
 
     boolean printEntries(String filePath);
 
+    boolean saveAddressBook(String filePath, ArrayList<Person> data) throws IOException;
 }
