@@ -1,5 +1,6 @@
 package com.BridgeLabz.services;
 
+import com.BridgeLabz.InterFace.AddressBookInterface;
 import com.BridgeLabz.model.Person;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
@@ -82,6 +83,15 @@ public class AddressBook implements AddressBookInterface {
             e.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public boolean saveAddressBook(String filePath, ArrayList<Person> data) throws IOException {
+        if (data.isEmpty())
+            return false;
+        writeFileData(data, filePath);
+        return true;
+
     }
 
 }
